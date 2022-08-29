@@ -14,7 +14,7 @@ using namespace std;
 // a > b    a < b
 // a >= b   a <= b
 // a == b   a != b
-
+// a = b;
 
 struct HighAccuracyNumber{
 	long long num[10005];
@@ -46,6 +46,7 @@ struct HighAccuracyNumber{
 		for (int __i = 1; __i <= __l; __i++)
 		{
 			num[__i] -= __A.num[__i] + __tw;
+			__tw = 0;
 			while (num[__i] < 0)
 			{
 				num[__i] += 10;
@@ -104,6 +105,12 @@ struct HighAccuracyNumber{
 		while (!num[len])
 			len--;
 	}
+	void write()
+	{
+		check();
+		for (int __i = len; __i >= 1; __i--)
+			putchar(num[__i] + '0');
+	}
 	friend Num operator +(Num __A, Num __B)
 	{
 		int __l = max(__A.len, __B.len);
@@ -114,6 +121,11 @@ struct HighAccuracyNumber{
 			__ys = __A.num[__i] / 10;
 			__A.num[__i] %= 10;
 		}
+		while (__ys)
+		{
+			__A.num[__A.len++] = __ys % 10;
+			__ys /= 10;
+		}
 		return __A;
 	}
 	friend Num operator -(Num __A, Num __B)
@@ -123,6 +135,7 @@ struct HighAccuracyNumber{
 		for (int __i = 1; __i <= __l; __i++)
 		{
 			__A.num[__i] -= __B.num[__i] + __tw;
+			__tw = 0;
 			while (__A.num[__i] < 0)
 			{
 				__A.num[__i] += 10;
