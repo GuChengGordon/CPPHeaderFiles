@@ -19,7 +19,6 @@ inline int read()
 	}
 	return x * f;
 }
-
 void write(int x)
 {
 	if (x < 0)
